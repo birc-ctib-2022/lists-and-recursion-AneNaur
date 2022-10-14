@@ -71,7 +71,8 @@ def contains(x: List[T], e: T) -> bool:
     >>> contains(L(1, L(2, L(3, None))), 2)
     True
     """
-    ...
+    return False if x==None or x.tail==None else True if e==x.head else contains(x.tail,e)
+    ...#runtime complexity: -best case: e er det foerste element i listen, O(1) -worst case: e er ikke i listen, O(n).
 
 
 def drop(x: List[T], k: int) -> List[T]:
@@ -86,7 +87,8 @@ def drop(x: List[T], k: int) -> List[T]:
     >>> drop(x, 3)
     L(4, None)
     """
-    ...
+    return x if k==0 else None if x==None else drop(x.tail, k-1)
+    ...#runtime complexity: -best case: k er lig 0, O(1) -worst case: k er lig laengden af x, O(n).
 
 
 def keep(x: List[T], k: int) -> List[T]:
@@ -100,7 +102,8 @@ def keep(x: List[T], k: int) -> List[T]:
     >>> keep(x, 3)
     L(1, L(2, L(3, None)))
     """
-    ...
+    return None if k==0 else L(x.head, keep(x.tail,k-1)) if length(x)>=k else None
+    ...# runtime complexity: -best case: k er lig 0, O(1) -worst case: k er lig laengden af x, O(n).
 
 
 def concat(x: List[T], y: List[T]) -> List[T]:
@@ -110,7 +113,8 @@ def concat(x: List[T], y: List[T]) -> List[T]:
     >>> concat(L(1, L(2, None)), L(3, L(4, None)))
     L(1, L(2, L(3, L(4, None))))
     """
-    ...
+    return None if lenght(x)==0 and length(y)==0 else L(x.head, concat(x.tail, y)) if x>0 else L(y.head, concat(x,y.tail))
+    ...# runtime complexity: -best case: laengden af x og y er 0, O(1) -worst case: laengden af x gange laengden af y, O(n*m).
 
 
 def append(x: List[T], e: T) -> List[T]:
@@ -120,6 +124,7 @@ def append(x: List[T], e: T) -> List[T]:
     >>> append(L(1, L(2, None)), 3)
     L(1, L(2, L(3, None)))
     """
+    return L(x, e)
     ...
 
 
