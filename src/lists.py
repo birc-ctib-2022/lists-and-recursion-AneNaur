@@ -71,7 +71,7 @@ def contains(x: List[T], e: T) -> bool:
     >>> contains(L(1, L(2, L(3, None))), 2)
     True
     """
-    return False if x.tail==None else True if e==x.head else contains(x.tail,e)
+    return False if x==None or x.tail==None else True if e==x.head else contains(x.tail,e)
     ...#runtime complexity: -best case: e er det foerste element i listen, O(1) -worst case: e er ikke i listen, O(n).
 
 
@@ -87,7 +87,7 @@ def drop(x: List[T], k: int) -> List[T]:
     >>> drop(x, 3)
     L(4, None)
     """
-    return x if k==0 else drop(x.tail, k-1)
+    return x if k==0 else None if x==None else drop(x.tail, k-1)
     ...#runtime complexity: -best case: k er lig 0, O(1) -worst case: k er lig laengden af x, O(n).
 
 
@@ -102,7 +102,7 @@ def keep(x: List[T], k: int) -> List[T]:
     >>> keep(x, 3)
     L(1, L(2, L(3, None)))
     """
-    return None if k==0 else L(x.head, keep(x.tail,k-1))
+    return None if k==0 else L(x.head, keep(x.tail,k-1)) if length(x)>=k else None
     ...# runtime complexity: -best case: k er lig 0, O(1) -worst case: k er lig laengden af x, O(n).
 
 
